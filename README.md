@@ -1,8 +1,10 @@
 siguanet-slimRest
+
 RESTful (Representational State Transfer) API service for SIGUANET development with Slim PHP Framework (http://www.slimframework.com).
 Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
 
 What's SIGUANET?
+==
 SIGUANET is a free software project that aims to share the University of Alicante's corporate built asset management technology (SIGUA) with the developers community. In this sense, SIGUANET will hopefully be useful for other universities and academic organizations.
 
 What's siguanet-slimRest?
