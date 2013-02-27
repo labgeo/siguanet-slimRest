@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>SIGUAPI Middleware Test</title>
+        <link rel="stylesheet" href="default.css" />
+        <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+        <script type="text/javascript" src="jquery.min.js"></script>       
+        <script type="text/javascript">
+ 
+
+$(document).ready(function() {
+	$("#target").click(function() {
+		var apikey = document.getElementById('apikey').value;
+		var codigo = document.getElementById('codigo').value;
+		if (codigo == null) {
+			$('div#resultadoDiv').html('Sin codigo');
+		} else {
+			var rootURL = "../restGis.php/private/estancias/estancia/"+apikey+"/"+codigo; 	
+			$.getJSON(rootURL,{} ,function(data) {
+				var tbl='<table id="miTabla">'+
+                            '<th colspan="2">'+ data[0].codigoestancia+'</th>'+
+                            '<tr><td>edificio</td><td>'+data[0].edificio+'</td></tr>'+
+							'<tr><td>Planta</td><td>'+ data[0].planta +'</td></tr>'+
+							'<tr><td>Estancia</td><td>'+ data[0].codigoestancia+'</td></tr>'+
+							'<tr><td>Denominacion</td><td>'+ data[0].denominacionestancia+'</td></tr>'+
+							'<tr><td>Superficie</td><td>'+ data[0].superficie_m2+'</td></tr>'+
+							'<tr><td>Codigo adscripci&oacute;n</td><td>'+ data[0].codigodptoestancia+'</td></tr>'+
+							'<tr><td>Nombre Adscripci&oacute;n</td><td>'+ data[0].nombredptoestancia+'</td></tr>'+
+							'<tr><td>C&oacute;digo de actividad</td><td>'+ data[0].codigoactividadestancia+'</td></tr>'+
+							'<tr><td>Descripcion actividad</td><td>'+ data[0].descripcionactividadestancia+'</td></tr>'+
+							'<tr><td>ocupantes</td><td>'+ data[0].ocupantes+'</td></tr>'+	
+							'</table>';
+                 $('div#resultadoDiv').html(tbl);
+             });
+         }    	 
+	});
+ }) 
+
+        </script>
+    </head>
+    <body>
+		<H3>DETALLE ESTANCIA MIDDLEWARE</H3>
+		API KEY : <input type="text" name="apikey" id="apikey" size="50" value="ab56b4d92b40713acc5af89985d4b786" /><BR/>
+		CODIGO  : <input type="text" name="codigo" id="codigo" size="10" value="0001P1019" />
+		<div id="target"><input type='button'value='Buscar'/></div>
+		
+        <div id="resultadoDiv"></div>
+        <p>CURL: <strong>curl -i -X GET http://(URL API)/private/estancias/estancia/API_KEY/0001P1019</strong></p>
+        <p>JSON: <a href="../restGis.php/private/estancias/estancia/12345/0001P1019">http://(URL API)/private/estancias/estancia/API_KEY/0001P1019</a></p>
+    </body>
+</html>

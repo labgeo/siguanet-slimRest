@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>SIGUAPI Middleware Test</title>
+        <link rel="stylesheet" href="default.css" />
+        <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+        <script type="text/javascript" src="jquery.min.js"></script>       
+        <script type="text/javascript">
+ 
+
+$(document).ready(function() {
+	$("#target").click(function() {		
+		var codigo = document.getElementById('codigo').value;
+		if (codigo == null) {
+			$('div#resultadoDiv').html('Sin codigo');
+		} else {
+			var rootURL = "../restGis.php/estancias/estancia/infofull2/"+codigo; 	
+			$.getJSON(rootURL,{} ,function(data) {
+				var tbl='<p>'+ JSON.stringify(data)+'</p>';
+                 $('div#resultadoDiv').html(tbl);
+             });
+         }    	 
+	});
+ }) 
+
+        </script>
+    </head>
+    <body>
+		<H3>GEOMETRIA ESTANCIA </H3>
+		CODIGO  : <input type="text" name="codigo" id="codigo" size="10" value="0001P1019" />
+		<div id="target"><input type='button' value='Buscar'/></div>
+		
+        <div id="resultadoDiv"></div>
+        <p>CURL: <strong>curl -i -X GET http://(URL API)/estancias/geometria/estancia/(codigo estancia)</strong></p>
+        <p>GEOJSON: <a href="../restGis.php/estancias/estancia/infofull2/0001P1019">http://(URL API)/estancias/estancia/infofull2/(codigo estancia)</a></p>
+        
+        <h3>INSTRUCCIONES</h3>
+        Para que funcione este método es necesario instalar una vista en un nuevo esquema. Este es el SQL necesario
+        <p><pre>
+
+CREATE SCHEMA webservices
+  AUTHORIZATION postgres;
+ CREATE OR REPLACE VIEW webservices.info_estancia AS 
+ SELECT te.edificio, te.planta, te.codigoestancia, te.denominacionestancia, te.superficie_m2, te.codigodptoestancia, te.nombredptoestancia, te.codigoactividadestancia, te.descripcionactividadestancia, ( SELECT count(oc.nif) AS count
+           FROM ( SELECT DISTINCT todaspersonas.nif, todaspersonas.codigo
+                   FROM todaspersonas
+                  ORDER BY todaspersonas.nif, todaspersonas.codigo) oc
+          WHERE oc.codigo::text = te.codigoestancia::text) AS ocupantes, st_asgeojson(st_transform(te.geometria, 4326)) AS geojson
+   FROM ( SELECT e.txt_edificio AS edificio, sig.geometria, 
+                CASE
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'PS'::text THEN 'Sótano'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'PB'::text THEN 'Planta Baja'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'P1'::text THEN 'Planta Primera'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'P2'::text THEN 'Planta Segunda'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'P3'::text THEN 'Planta Tercera'::text
+                    ELSE NULL::text
+                END AS planta, 
+                CASE
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'PS'::text THEN 'Soterrani'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'PB'::text THEN 'Planta Baixa'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'P1'::text THEN 'Planta Primera'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'P2'::text THEN 'Planta Segona'::text
+                    WHEN "substring"(sig.codigo::text, 5, 2) = 'P3'::text THEN 'Planta Tercera'::text
+                    ELSE NULL::text
+                END AS planta_val, sig.codigo AS codigoestancia, sig.denominaci AS denominacionestancia, sig.observacio AS denominacionestancia_val, round(st_area(sig.geometria)::numeric, 2) AS superficie_m2, sig.coddpto AS codigodptoestancia, ds.txt_dpto_sigua AS nombredptoestancia, sig.actividad AS codigoactividadestancia, a.txt_actividad AS descripcionactividadestancia, a.txt_actividad_val AS descripcionactividadestancia_val
+           FROM todasestancias sig
+      JOIN edificios e ON "substring"(sig.codigo::text, 1, 4) = (e.cod_zona::text || e.cod_edificio::text)
+   JOIN departamentossigua ds ON sig.coddpto::text = ds.cod_dpto_sigua::text
+   JOIN actividades a ON sig.actividad = a.codactividad) te; 
+  IS 'Web Service - Obtiene toda la información de una estancia';
+  -- test
+  SELECT * FROM webservices.info_estancia WHERE codigoestancia ='0001P1019' LIMIT 1;
+        </pre></p>
+    </body>
+</html>

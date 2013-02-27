@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Anadir campus</title>
+        <link rel="stylesheet" href="default.css" />
+    </head>
+    <body>
+		<H3>INSERTAR CAMPUS</H3>
+        <form name="frmAdd" method="post" action="../restGis.php/zonas/add" />
+            Codigo: <input type="text" name="cod_zona" id="cod_zona" value="03" /><br/>
+            Nombre: <input type="text" name="txt_zona" id="txt_zona" value="CAMPUS DE JOSE" /><br/>
+            <input type="submit" value="Add"/>
+        </form>
+        
+        <p>CURL: <STRONG>curl -i -X POST -d "cod_zona=03&txt_zona=CAMPUSJOSE" http://localhost/siguapi/api/index.php/zonas/add</STRONG>
+</p>
+    </body>
+</html>

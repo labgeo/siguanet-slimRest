@@ -1,0 +1,97 @@
+body
+    {
+    
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size:1em;
+    color: #000000;
+    text-align:left;
+}
+
+
+/* base.css, part of YUI's CSS Foundation */
+h1 {
+	/*18px via YUI Fonts CSS foundation*/
+	font-size:138.5%;  
+}
+h2 {
+	/*16px via YUI Fonts CSS foundation*/
+	font-size:123.1%; 
+}
+h3 {
+	/*14px via YUI Fonts CSS foundation*/
+	font-size:108%;  
+}
+h1,h2,h3 {
+	/* top & bottom margin based on font size */
+	margin:1em 0;
+}
+h1,h2,h3,h4,h5,h6,strong {
+	/*bringing boldness back to headers and the strong element*/
+	font-weight:bold; 
+}
+abbr,acronym {
+	/*indicating to users that more info is available */
+	border-bottom:1px dotted #000;
+	cursor:help;
+} 
+em {
+	/*bringing italics back to the em element*/
+	font-style:italic;
+}
+blockquote,ul,ol,dl {
+	/*giving blockquotes and lists room to breath*/
+	margin:1em;
+}
+ol,ul,dl {
+	/*bringing lists on to the page with breathing room */
+	margin-left:2em;
+}
+ol li {
+	/*giving OL's LIs generated numbers*/
+	list-style: decimal outside;	
+}
+ul li {
+	/*giving UL's LIs generated disc markers*/
+	list-style: disc outside;
+}
+dl dd {
+	/*giving UL's LIs generated numbers*/
+	margin-left:1em;
+}
+
+caption {
+	/*coordinated marking to match cell's padding*/
+	margin-bottom:.5em;
+	/*centered so it doesn't blend in to other content*/
+	text-align:center;
+}
+p,fieldset,table {
+	/*so things don't run into each other*/
+	margin-bottom:1em;
+}
+	#miTabla
+	{
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	width:100%;
+	border-collapse:collapse;
+	}
+	#miTabla td, #miTabla th 
+	{
+	font-size:0.8em;
+	border:1px solid #98bf21;
+	padding:3px 7px 2px 7px;
+	}
+	#miTabla th 
+	{
+	font-size:1em;
+	text-align:left;
+	padding-top:5px;
+	padding-bottom:4px;
+	background-color:#A7C942;
+	color:#fff;
+	}
+	#miTabla tr.alt td 
+	{
+	color:#000;
+	background-color:#EAF2D3;
+	}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="default.css" />
+        <title>Anadir campus</title>
+        
+    </head>
+    <body>
+		<h3>ACTUALIZAR UN CAMPUS</h3>
+        <form name="frmAdd" method="post" action="http://localhost/siguapi/api/index.php/zonas/update" />
+            Codigo: <input type="text" name="cod_zona" id="cod_zona" value="03" /><br/>
+            Nombre: <input type="text" name="txt_zona" id="txt_zona" value="CAMPUS DE PEPE" /><br/>
+            <input type="submit" value="Update"/>
+        </form>
+        
+        <p>CURL: <strong>curl -i -X POST -d "cod_zona=03&txt_zona=CAMPUS+DE+PEPE" http://(url api)/zonas/update </strong>
+</p>
+    </body>
+</html>
+

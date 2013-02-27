@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>SIGUAPI Test</title>
+        <link rel="stylesheet" href="default.css" />
+        <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+        <script type="text/javascript" src="jquery.min.js"></script>       
+        <script type="text/javascript">
+ 
+
+$(document).ready(function() {
+	$("#target").click(function() {		
+		var codigo = document.getElementById('codigo').value;
+		if (codigo == null) {
+			$('div#resultadoDiv').html('Sin codigo');
+		} else {
+			var rootURL = "../restGis.php/estancias/estancia/geometria/"+codigo; 	
+			$.getJSON(rootURL,{} ,function(data) {
+				var tbl='<p>'+ data[0].geometry+'</p>';
+                 $('div#resultadoDiv').html(tbl);
+             });
+         }    	 
+	});
+ }) 
+
+        </script>
+    </head>
+    <body>
+		<H3>GEOMETRIA ESTANCIA </H3>
+		CODIGO  : <input type="text" name="codigo" id="codigo" size="10" value="0001P1019" />
+		<div id="target"><input type='button'value='Buscar'/></div>
+		
+        <div id="resultadoDiv"></div>
+        <p>CURL: <strong>curl -i -X GET http://(URL API)/estancias/estancia/geometria/(codigo estancia)</strong></p>
+        <p>GEOJSON: <a href="../restGis.php/estancias/estancia/geometria/0037P1015">http://(URL API)/estancias/estancia/geometria/(codigo estancia)</a></p>
+    </body>
+</html>

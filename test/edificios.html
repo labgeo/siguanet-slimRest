@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>SIGUAPI Test</title>
+        <link rel="stylesheet" href="default.css" />
+        <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+        <script type="text/javascript" src="jquery.min.js"></script>      
+</script>
+<script type="text/javascript">
+// /*
+            $(document).ready(function(){
+                var rootURL = "../restGis.php/edificios/list";
+                      $.getJSON(rootURL,{},function(data) {	
+                        var out='<select name="edificios" id="edificios"><option>Listado edificios</option>';
+                        $.each(data,function(i,item){
+							out += '<option value="'+ data[i].codigo +'">'+ data[i].codigo + ' ' + data[i].nombre +'</option>';                          
+                        });
+                        out +='</select>';
+                        $('div#salidaHTML').html(out);
+                        $("#edificios").bind("change", function() { 
+							var mivalor = $("#edificios").val();
+							//alert("value changed to "+ mivalor);
+							var rootURL="../restGis.php/edificios/ocupantes/list/"+mivalor; 
+							$.getJSON(rootURL,{} ,function(data) {					
+								var tbl='<table id="miTabla"><th>NOMBRES</th>';
+								$.each(data,function(i,item) {
+									tbl +='<tr><td><a href="persona.html?nifempleado='+data[i].nif+'">'+ data[i].nombre + '</a></td></tr>';
+								});
+								tbl +='</table>';
+								$('div#resultadoDiv').html(tbl);
+							 });	
+						});
+                    });
+                    
+                    
+            });
+       
+</script>
+    </head>
+    <body>
+		<H3>LISTADO DE EDIFICIO EN COMBO</H3>
+        <div id="salidaHTML"></div>
+        <div id="resultadoDiv"></div>
+        <p>Cada vez que se cambia de edificio aparece una tabla con los ocupantes del mismo (/edificios/ocupantes/list/[edificio]). 
+        Cada persona tiene un enlace a otro método (/personal/persona/list/[nif])</p>
+        <p>CURL: <strong>curl -i -X GET http://localhost/siguapi/api/index.php/edificios/list</strong></p>
+        <p>JSON: <a href="../restGis.php/edificios/list">http://(URL API)/edificios/list</a></p>
+    </body>
+</html>

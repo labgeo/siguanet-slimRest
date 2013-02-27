@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>SIGUAPI Test</title>
+        <link rel="stylesheet" href="default.css" />
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript">
+ 
+
+$(document).ready(function() {
+	$("#target").click(function(event) {
+		
+			 var zona = document.getElementById('zona').value;
+			 if (zona == null) {
+				 $('div#resultadoDiv').html('Sin zona');	 
+			 } else {
+                var rootURL = "../restGis.php/zonas/delete/"+zona; 	
+                event.preventDefault();
+               
+				$.ajax({
+					url: rootURL,
+					type: 'DELETE',
+					data: $("#target").serializeArray(),
+					success: function(data) { $("div#resultadoDiv").html(data); }
+				});               
+  				             
+             }    	 
+	});
+ }) 
+
+        </script>
+    </head>
+    <body>
+		<h3>BORRAR UN CAMPUS</h3>
+		<input type="text" name="zona" id="zona" size="10" value="03" />
+		<div id="target"><input type='button'value='Borrar campus'/></div>
+
+        <div 
+        style="border: dotted;
+			border-color: #ff0000;
+			border-width: 2px;
+			margin-left:25px;
+			margin-right:25px;
+			margin-top: 25px;
+			margin-bottom: 25px;
+			background-color:#FFDCA8;"
+        id="resultadoDiv"></div>
+        <p>CURL: <STRONG>curl -i -X DELETE http://(URL API)/zonas/delete/03</STRONG></p>
+    </body>
+</html>
