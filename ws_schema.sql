@@ -1,6 +1,17 @@
 /*
 SQL for RESTful API
 */
+-- table creation
+CREATE TABLE apikeys
+(
+  apikey character varying(100) NOT NULL,
+  CONSTRAINT apikeys_pkey PRIMARY KEY (apikey )
+)
+-- INSERT keys
+INSERT INTO apikeys (apikey) VALUES ('abcde');
+INSERT INTO apikeys (apikey) VALUES ('12345');
+INSERT INTO apikeys (apikey) VALUES ( md5('abcde') );
+
 -- scheme creation
 CREATE SCHEMA webservices;
 
