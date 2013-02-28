@@ -36,6 +36,22 @@ For siguanet-slimRest  use the folder where Slim Framework is installed and copy
 - template/doc.php: documentation template
 Finally execute this sql script: ws_schema.sql
 
+Folders and files
+
+> siguapi
+> ├── config.php
+> ├── restGis.php
+> ├── Slim
+> │   ├── Exception
+> │   ├── Http
+> │   └── Middleware
+> ├── templates
+> │   └── doc.php
+> └──  test
+>     ├── <html files>
+>     └── leaflet
+>         └── <leaflet js files>
+
 ###Demo
 
 For testing purposes, open this URL with a browser:
