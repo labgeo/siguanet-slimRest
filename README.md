@@ -39,10 +39,13 @@ Finally execute this sql script: ws_schema.sql
 ###Demo
 
 For testing purposes, open this URL with a browser:
-http://[your hostname]/[RESTful folder]/test/index.html
+
+*http://[your hostname]/[RESTful folder]/test/index.html*
+
 Change path on html files if is required.
 
 ###Documentation (in spanish):
 
 Built-in documentation can be browsed through a request to the API. Point to this url:
-http://[your hostname]/[RESTful folder]/restGis.php/doc
+
+*http://[your hostname]/[RESTful folder]/restGis.php/doc*
