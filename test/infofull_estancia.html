@@ -15,7 +15,7 @@ $(document).ready(function() {
 		if (codigo == null) {
 			$('div#resultadoDiv').html('Sin codigo');
 		} else {
-			var rootURL = "../restGis.php/estancias/estancia/infofull2/"+codigo; 	
+			var rootURL = "../restGis.php/estancias/estancia/geojsonfull/"+codigo; 	
 			$.getJSON(rootURL,{} ,function(data) {
 				var tbl='<p>'+ JSON.stringify(data)+'</p>';
                  $('div#resultadoDiv').html(tbl);
@@ -32,8 +32,8 @@ $(document).ready(function() {
 		<div id="target"><input type='button' value='Buscar'/></div>
 		
         <div id="resultadoDiv"></div>
-        <p>CURL: <strong>curl -i -X GET http://(URL API)/estancias/geometria/estancia/(codigo estancia)</strong></p>
-        <p>GEOJSON: <a href="../restGis.php/estancias/estancia/infofull2/0001P1019">http://(URL API)/estancias/estancia/infofull2/(codigo estancia)</a></p>
+        <p>CURL: <strong>curl -i -X GET http://(URL API)/estancias/estancia/geojsonfull/(codigo estancia)</strong></p>
+        <p>GEOJSON: <a href="../restGis.php/estancias/estancia/geojsonfull/0001P1019">http://(URL API)/estancias/estancia/geojsonfull/(codigo estancia)</a></p>
         
         <h3>INSTRUCCIONES</h3>
         Para que funcione este método es necesario instalar una vista en un nuevo esquema. Este es el SQL necesario
